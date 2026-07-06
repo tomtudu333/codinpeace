@@ -1,0 +1,60 @@
+.right-inspector {
+  grid-area: inspector;
+  display: flex;
+  flex-direction: column;
+  background: rgba(15, 15, 25, 0.88);
+  backdrop-filter: blur(12px);
+  border-left: 1px solid rgba(255, 255, 255, 0.06);
+  overflow: hidden;
+  user-select: none;
+}
+
+.inspector-header {
+  display: flex;
+  align-items: center;
+  height: 40px;
+  padding: 0 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.inspector-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.35);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.inspector-content {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.inspector-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  text-align: center;
+}
+
+.inspector-empty-icon {
+  color: rgba(255, 255, 255, 0.12);
+  margin-bottom: 4px;
+}
+
+.inspector-empty-text {
+  font-size: 13px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.25);
+}
+
+.inspector-empty-hint {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.15);
+  max-width: 180px;
+  line-height: 1.4;
+}
