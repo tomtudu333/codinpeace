@@ -17,7 +17,7 @@ export const TopToolbar: React.FC<TopToolbarProps> = ({ onToggleShowcase }) => {
             <rect x="1" y="10.6" width="6.4" height="6.4" rx="1.2" stroke="currentColor" strokeWidth="1.5" />
             <rect x="10.6" y="10.6" width="6.4" height="6.4" rx="1.2" stroke="currentColor" strokeWidth="1.5" />
           </svg>
-          <span className="toolbar-title">Stratoscope</span>
+          <span className="toolbar-title">CodinPeace</span>
         </div>
       </div>
 

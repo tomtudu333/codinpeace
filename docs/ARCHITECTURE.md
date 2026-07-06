@@ -1,4 +1,4 @@
-# Stratoscope Architecture
+# CodinPeace Architecture
 
 ## Project Structure
 

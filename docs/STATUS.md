@@ -1,4 +1,4 @@
-# Stratoscope — Build Status
+# CodinPeace — Build Status
 
 ## Phase 1: Infinite Canvas / Renderer ✅
 

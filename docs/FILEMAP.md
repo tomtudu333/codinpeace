@@ -1,4 +1,4 @@
-# Stratoscope — File Map
+# CodinPeace — File Map
 
 ## `src/design-system/` — UI Component Library
 

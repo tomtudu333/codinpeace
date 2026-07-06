@@ -1,4 +1,4 @@
-# Stratoscope — Next Steps
+# CodinPeace — Next Steps
 
 ## Immediate Polish (Before Phase 2C)
 
