@@ -22,6 +22,12 @@ export class Camera {
   get velocityY(): number { return this._velocityY; }
   get isPanning(): boolean { return this._isPanning; }
 
+  setPosition(x: number, y: number, zoom: number): void {
+    this._x = x;
+    this._y = y;
+    this._zoom = zoom;
+  }
+
   setPanning(value: boolean): void {
     this._isPanning = value;
   }
