@@ -1,4 +1,4 @@
-# CodeMap Architecture
+# Stratoscope Architecture
 
 ## Project Structure
 

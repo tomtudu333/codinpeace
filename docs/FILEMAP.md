@@ -1,4 +1,4 @@
-# File Map
+# Stratoscope — File Map
 
 ## `src/design-system/` — UI Component Library
 

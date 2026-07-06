@@ -1,4 +1,4 @@
-# CodeMap — Next Steps
+# Stratoscope — Next Steps
 
 ## Immediate Polish (Before Phase 2C)
 

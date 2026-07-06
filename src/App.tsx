@@ -83,7 +83,7 @@ const AppContent: React.FC = () => {
     { id: 'palette', label: 'Toggle Command Palette', description: 'Show or hide command palette', icon: 'Command', shortcut: '\u2303\u21E7P', onExecute: () => setShowCommandPalette((v) => !v) },
     { id: 'toggle-theme', label: 'Toggle Theme', description: 'Switch between dark and light mode', icon: 'Settings', onExecute: () => toggleTheme() },
     { id: 'reset-camera', label: 'Reset Camera', description: 'Reset view to center', icon: 'Refresh', onExecute: () => { const e = engineRef.current; if (e) { e.camera.pan(0, 0); } } },
-    { id: 'show-info', label: 'Show System Info', description: 'Display system information toast', icon: 'Info', onExecute: () => addToast('CodeMap v0.1.0 | Rendering: Canvas 2D | Theme: Dark', 'info') },
+    { id: 'show-info', label: 'Show System Info', description: 'Display system information toast', icon: 'Info', onExecute: () => addToast('Stratoscope v0.1.0 | Rendering: Canvas 2D | Theme: Dark', 'info') },
   ];
 
   const contextMenuItems: ContextMenuItem[] = [

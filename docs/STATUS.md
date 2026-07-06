@@ -1,4 +1,4 @@
-# CodeMap — Build Status
+# Stratoscope — Build Status
 
 ## Phase 1: Infinite Canvas / Renderer ✅
 
