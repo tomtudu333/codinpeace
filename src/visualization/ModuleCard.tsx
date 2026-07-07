@@ -8,6 +8,7 @@ interface ModuleCardProps {
   accentColor: string;
   isSelected: boolean;
   screenWidth: number;
+  screenHeight: number;
   zoom: number;
   onSelect: (id: string) => void;
   onSelectFeature: (id: string) => void;
@@ -16,11 +17,11 @@ interface ModuleCardProps {
   }>;
 }
 
-const FEATURE_FADE_START = 1.2;
-const FEATURE_FADE_END = 2.5;
+const FEATURE_FADE_START = 0.6;
+const FEATURE_FADE_END = 1.5;
 
 export const ModuleCard: React.FC<ModuleCardProps> = React.memo(({
-  node, accentColor, isSelected, screenWidth,
+  node, accentColor, isSelected, screenWidth, screenHeight,
   zoom, onSelect, onSelectFeature, features = [],
 }) => {
   const meta = getModuleMetadata(node);
@@ -31,14 +32,15 @@ export const ModuleCard: React.FC<ModuleCardProps> = React.memo(({
 
   const cardStyle: React.CSSProperties = useMemo(() => ({
     width: screenWidth,
+    minHeight: screenHeight,
     cursor: 'pointer',
-    transition: 'box-shadow 0.15s ease',
+    transition: 'box-shadow 0.15s ease, min-height 0.2s ease',
     boxShadow: isSelected
       ? `0 0 0 2px ${accentColor}, 0 0 24px ${accentColor}40`
       : 'none',
     border: `1px solid ${accentColor}40`,
     position: 'relative',
-  }), [screenWidth, isSelected, accentColor]);
+  }), [screenWidth, screenHeight, isSelected, accentColor]);
 
   const p = Math.max(8, Math.min(16, 16 * zoom));
   const fSize = Math.max(10, Math.min(14, 14 * zoom / 1.5));
@@ -115,6 +117,7 @@ export const ModuleCard: React.FC<ModuleCardProps> = React.memo(({
               gridTemplateColumns: 'repeat(2, 1fr)',
               gap: `${p * 0.5}px`,
               paddingTop: `${p * 0.5}px`,
+              minWidth: 0,
             }}>
               {features.map((feat) => {
                 const featMeta = getFeatureMetadata(feat.node);
@@ -125,6 +128,8 @@ export const ModuleCard: React.FC<ModuleCardProps> = React.memo(({
                     key={feat.node.id}
                     onClick={(e) => { e.stopPropagation(); onSelectFeature(feat.node.id); }}
                     style={{
+                      minWidth: 0,
+                      overflow: 'hidden',
                       border: `1px solid ${accentColor}30`,
                       borderRadius: '6px',
                       background: 'var(--bg-surface)',

@@ -53,7 +53,8 @@ export const Canvas: React.FC<CanvasProps> = ({ engineRef, onStatsUpdate }) => {
       if (e.code === 'Space') {
         e.preventDefault();
         isSpaceDown.current = true;
-        canvas!.style.cursor = 'grab';
+        if (!(e.target as HTMLElement).closest('[data-zoom-area]')) return;
+        document.body.style.cursor = 'grab';
       }
     };
 
@@ -62,12 +63,13 @@ export const Canvas: React.FC<CanvasProps> = ({ engineRef, onStatsUpdate }) => {
         e.preventDefault();
         isSpaceDown.current = false;
         if (!isPanning.current) {
-          canvas!.style.cursor = 'default';
+          document.body.style.cursor = '';
         }
       }
     };
 
     const handleMouseDown = (e: MouseEvent) => {
+      if (!(e.target as HTMLElement).closest('[data-zoom-area]')) return;
       const camera = engine.camera;
 
       if (e.button === 1) {
@@ -75,12 +77,12 @@ export const Canvas: React.FC<CanvasProps> = ({ engineRef, onStatsUpdate }) => {
         isPanning.current = true;
         lastMousePos.current = { x: e.clientX, y: e.clientY };
         camera.setPanning(true);
-        canvas!.style.cursor = 'grabbing';
+        document.body.style.cursor = 'grabbing';
       } else if (e.button === 0 && isSpaceDown.current) {
         isPanning.current = true;
         lastMousePos.current = { x: e.clientX, y: e.clientY };
         camera.setPanning(true);
-        canvas!.style.cursor = 'grabbing';
+        document.body.style.cursor = 'grabbing';
       }
     };
 
@@ -99,7 +101,7 @@ export const Canvas: React.FC<CanvasProps> = ({ engineRef, onStatsUpdate }) => {
       if (isPanning.current && (e.button === 0 || e.button === 1)) {
         isPanning.current = false;
         engine.camera.setPanning(false);
-        canvas!.style.cursor = isSpaceDown.current ? 'grab' : 'default';
+        document.body.style.cursor = isSpaceDown.current ? 'grab' : '';
       }
     };
 
@@ -123,13 +125,13 @@ export const Canvas: React.FC<CanvasProps> = ({ engineRef, onStatsUpdate }) => {
       if (isPanning.current) {
         isPanning.current = false;
         engine.camera.setPanning(false);
-        canvas!.style.cursor = isSpaceDown.current ? 'grab' : 'default';
+        document.body.style.cursor = isSpaceDown.current ? 'grab' : '';
       }
     };
 
     window.addEventListener('keydown', handleKeyDown);
     window.addEventListener('keyup', handleKeyUp);
-    canvas.addEventListener('mousedown', handleMouseDown);
+    window.addEventListener('mousedown', handleMouseDown);
     window.addEventListener('mousemove', handleMouseMove);
     window.addEventListener('mouseup', handleMouseUp);
     canvas.addEventListener('wheel', handleWheel, { passive: false });
@@ -142,7 +144,7 @@ export const Canvas: React.FC<CanvasProps> = ({ engineRef, onStatsUpdate }) => {
       engineRef.current = null;
       window.removeEventListener('keydown', handleKeyDown);
       window.removeEventListener('keyup', handleKeyUp);
-      canvas.removeEventListener('mousedown', handleMouseDown);
+      window.removeEventListener('mousedown', handleMouseDown);
       window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('mouseup', handleMouseUp);
       canvas.removeEventListener('wheel', handleWheel);
