@@ -66,7 +66,7 @@ export class SceneGraph {
     return path;
   }
 
-  getFlatList(nodeType?: 'module' | 'feature'): SceneNode[] {
+  getFlatList(nodeType?: 'module' | 'feature' | 'function'): SceneNode[] {
     const list: SceneNode[] = [];
     this.traverse((node) => {
       if (node.id === '__root__') return;

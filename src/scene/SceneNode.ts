@@ -9,7 +9,7 @@ export interface SceneNode {
   parent: SceneNode | null;
   metadata: Record<string, unknown>;
   style?: Record<string, unknown>;
-  nodeType: 'module' | 'feature';
+  nodeType: 'module' | 'feature' | 'function';
   name: string;
 }
 

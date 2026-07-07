@@ -21,6 +21,7 @@ export const Canvas: React.FC<CanvasProps> = ({ engineRef, onStatsUpdate }) => {
 
     const engine = new Engine(canvas);
     engineRef.current = engine;
+    (window as any).__ENGINE__ = engine;
 
     let lastStatsUpdateTime = 0;
     engine.onStatsUpdate = (stats: PerformanceStats) => {

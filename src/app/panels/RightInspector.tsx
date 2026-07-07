@@ -1,6 +1,6 @@
 import React from 'react';
-import { Icon, IconButton, Divider, InspectorSection, PropertyRow, StatusIndicator, MetricDisplay, MetricGrid, MiniStatusWidget } from '@/design-system';
-import { SceneNode, isModuleNode, getModuleMetadata, isFeatureNode, getFeatureMetadata } from '@/scene';
+import { Icon, IconButton, Divider, InspectorSection, PropertyRow, StatusIndicator, MetricDisplay, MetricGrid, MiniStatusWidget, CodeBox } from '@/design-system';
+import { SceneNode, isModuleNode, getModuleMetadata, isFeatureNode, getFeatureMetadata, isFunctionNode, getFunctionMetadata } from '@/scene';
 import './RightInspector.css';
 
 interface RightInspectorProps {
@@ -22,6 +22,7 @@ const docStatusColor = (status: string): 'success' | 'warning' | 'error' => {
 export const RightInspector: React.FC<RightInspectorProps> = ({ selectedNode }) => {
   const moduleMeta = selectedNode && isModuleNode(selectedNode) ? getModuleMetadata(selectedNode) : null;
   const featureMeta = selectedNode && isFeatureNode(selectedNode) ? getFeatureMetadata(selectedNode) : null;
+  const functionMeta = selectedNode && isFunctionNode(selectedNode) ? getFunctionMetadata(selectedNode) : null;
 
   const renderSelectionEmpty = () => (
     <InspectorSection title="Selection">
@@ -134,6 +135,60 @@ export const RightInspector: React.FC<RightInspectorProps> = ({ selectedNode }) 
     );
   };
 
+  const renderFunctionData = () => {
+    if (!functionMeta) return null;
+    return (
+      <>
+        <InspectorSection title="Selection">
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', padding: '4px 0' }}>
+            <div style={{ opacity: 0.7, display: 'flex' }}>
+              <Icon name="Code" size={20} />
+            </div>
+            <div>
+              <div style={{ fontSize: '14px', fontWeight: 600, color: 'var(--text-primary)', fontFamily: 'monospace' }}>{functionMeta.name}</div>
+              <div style={{ fontSize: '10px', color: 'var(--text-muted)', fontFamily: 'monospace' }}>{functionMeta.signature}</div>
+            </div>
+          </div>
+        </InspectorSection>
+
+        <Divider />
+
+        <InspectorSection title="General">
+          <PropertyRow label="Name" value={functionMeta.name} />
+          <PropertyRow label="Type" value="Function" />
+          <PropertyRow label="ID" value={selectedNode?.id ?? '—'} />
+          <PropertyRow label="Lines" value={`${functionMeta.lineStart}–${functionMeta.lineEnd}`} />
+          <PropertyRow label="File" value={functionMeta.filePath} />
+        </InspectorSection>
+
+        <Divider />
+
+        <InspectorSection title="Metrics">
+          <MetricGrid columns={2}>
+            <MetricDisplay label="Complexity" value={functionMeta.complexity} size="sm" color={functionMeta.complexity > 10 ? 'var(--status-warning)' : 'var(--text-primary)'} />
+            <MetricDisplay label="Documentation" value={functionMeta.documentation} size="sm" color={`var(--status-${docStatusColor(functionMeta.documentation)})`} />
+            <MetricDisplay label="Calls" value={`${functionMeta.calls.length} fn`} size="sm" />
+            <MetricDisplay label="Called By" value={`${functionMeta.calledBy.length} fn`} size="sm" />
+          </MetricGrid>
+        </InspectorSection>
+
+        <Divider />
+
+        <InspectorSection title="Code">
+          <CodeBox
+            code={functionMeta.code}
+            language="typescript"
+            header={
+              <span style={{ fontSize: '10px', color: 'var(--text-muted)', fontFamily: 'monospace' }}>
+                {functionMeta.filePath}:{functionMeta.lineStart}
+              </span>
+            }
+          />
+        </InspectorSection>
+      </>
+    );
+  };
+
   return (
     <aside className="right-inspector">
       <div className="inspector-header-bar">
@@ -145,6 +200,7 @@ export const RightInspector: React.FC<RightInspectorProps> = ({ selectedNode }) 
         {!selectedNode && renderSelectionEmpty()}
         {moduleMeta && renderModuleData()}
         {featureMeta && renderFeatureData()}
+        {functionMeta && renderFunctionData()}
       </div>
     </aside>
   );

@@ -1,6 +1,7 @@
-import { ModuleRecord, FeatureRecord, ModuleDataProvider } from '../ModuleDataProvider';
+import { ModuleRecord, FeatureRecord, FunctionRecord, ModuleDataProvider } from '../ModuleDataProvider';
 import { mockModules } from './mockModules';
 import { mockFeatures } from './mockFeatures';
+import { mockFunctions } from './mockFunctions';
 
 export class MockModuleDataProvider implements ModuleDataProvider {
   getModules(): ModuleRecord[] {
@@ -9,5 +10,9 @@ export class MockModuleDataProvider implements ModuleDataProvider {
 
   getFeatures(moduleId: string): FeatureRecord[] {
     return [...(mockFeatures[moduleId] ?? [])];
+  }
+
+  getFunctions(featureId: string): FunctionRecord[] {
+    return [...(mockFunctions[featureId] ?? [])];
   }
 }
