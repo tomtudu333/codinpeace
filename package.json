@@ -4,8 +4,8 @@
   "private": true,
   "main": "dist-main/main.js",
   "scripts": {
-    "dev": "tsc -p tsconfig.main.json && concurrently -k \"vite\" \"wait-on http://localhost:5173 && electron .\"",
-    "build": "vite build && tsc -p tsconfig.main.json && electron-builder",
+    "dev": "tsc -p tsconfig.main.json && concurrently -k \"powershell -NoProfile -File scripts/dev.ps1\" \"wait-on http://localhost:5173 && electron .\"",
+    "build": "powershell -NoProfile -File scripts/build.ps1 && tsc -p tsconfig.main.json && electron-builder",
     "build:renderer": "vite build",
     "build:electron": "tsc -p tsconfig.main.json",
     "preview": "vite build && tsc -p tsconfig.main.json && electron ."

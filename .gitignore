@@ -23,6 +23,9 @@ Thumbs.db
 # Docs
 docs/
 
+# Scripts
+scripts/
+
 # Environment
 .env
 .env.local
