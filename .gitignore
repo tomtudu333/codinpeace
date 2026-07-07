@@ -29,3 +29,7 @@ scripts/
 # Environment
 .env
 .env.local
+
+# Graphify knowledge graph
+graphify-out/
+raw/
